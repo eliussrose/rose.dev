@@ -1,0 +1,173 @@
+<div align="center">
+  <img src="public/next.svg" alt="rose.dev Logo" width="200" height="auto" />
+  <h1>🚀 rose.dev - Premium Code Editor</h1>
+  
+  <p>
+    <b>The Next-Generation, Open-Source Browser-Based AI Code Editor</b><br/>
+    <i>Developed by EliussRose</i>
+  </p>
+
+  <p>
+    🌐 <b>Live Preview:</b> <a href="https://koragpt.vercel.app/" target="_blank">https://koragpt.vercel.app/</a>
+  </p>
+
+  <!-- Badges -->
+  <p>
+    <a href="https://github.com/alornishan014/KoraGPT_IDE/blob/master/LICENSE">
+      <img src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" alt="License" />
+    </a>
+    <a href="https://github.com/alornishan014/KoraGPT_IDE/pulls">
+      <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome" />
+    </a>
+    <img src="https://img.shields.io/badge/Next.js-16.2-black?logo=next.js" alt="Next.js" />
+    <img src="https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript" alt="TypeScript" />
+  </p>
+</div>
+
+<br />
+
+## 🌟 What is rose.dev?
+
+**rose.dev** is an advanced, AI-powered code editor that runs directly in your browser. Inspired by industry-leading editors like Cursor and Trae, rose.dev provides a premium, seamless development experience with deep AI integration. It understands your codebase, suggests complex edits, and applies them via an interactive, multi-tabbed Monaco Editor.
+
+### 🛠️ How rose.dev Works (Architecture)
+rose.dev is built using modern web technologies to provide a native-like IDE experience in the browser:
+- **ChatSection**: The core AI interface where you can communicate with the AI. The AI understands your project context.
+- **EditorSection**: Powered by Monaco Editor (the core of VS Code), offering robust code editing, syntax highlighting, and completion.
+- **DiffView**: When the AI suggests changes, you can view them side-by-side with your original code, making it easy to accept or reject modifications.
+- **ProjectTree**: A comprehensive file explorer that allows you to navigate through your project structure intuitively.
+- **Sidebar & UI**: Built with Next.js and styled with modern CSS to ensure a sleek and responsive developer experience.
+
+### ✨ Current Key Features
+
+- **🤖 Deep AI Integration**: Chat directly with your codebase. The AI can read multiple files, understand context, and suggest precise code modifications.
+- **📝 Monaco Editor Inside**: Powered by the same editor that runs VS Code, featuring syntax highlighting, code completion, minimap, and robust formatting.
+- **🔄 Interactive Diff View**: See AI suggestions side-by-side with your original code. Accept (`Keep`) or Reject (`Undo`) changes with a single click.
+- **📑 Multi-Tab Support**: Open, edit, and navigate through multiple files simultaneously with a sleek Tab Bar and Breadcrumbs.
+- **🎙️ Voice-to-Code**: Speak your commands natively in Bengali or English, and let rose.dev write the code for you.
+- **🎨 Image Generation**: Built-in support for generating images via Stable Diffusion.
+- **⌨️ Integrated Terminal**: Run Python, Django, npm, git commands directly in the browser.
+- **🔍 Project Analyzer**: Automatic bug detection, code quality checks, and Django project recognition.
+- **🐙 GitHub Integration**: Clone repositories, commit changes, and push to GitHub without leaving the IDE.
+- **🐍 Python & Django Support**: Special features for Python/Django development with smart analysis.
+
+---
+
+## 🎯 Future Improvements (Areas for Contribution)
+
+To make rose.dev the absolute best open-source AI editor, we are looking for contributors to help us build the following advanced features:
+
+1. **🔌 Local LLM Support (Ollama)**: ✅ DONE - Enable developers to use offline, local AI models.
+2. **💻 Integrated Terminal Emulation**: ✅ DONE - Run shell commands, install packages, and start dev servers.
+3. **🔍 Project Analysis**: ✅ DONE - Automatic bug detection and code quality checks.
+4. **🐙 GitHub / GitLab Integration**: ✅ DONE - Clone, commit, and push changes from within the IDE.
+5. **🌐 Real-Time Collaboration**: Multiplayer editing capabilities similar to Google Docs or VS Code Live Share.
+6. **🛠️ Advanced LSP (Language Server Protocol) Support**: Better intellisense, error checking, and code navigation for Python, Rust, Go, and more.
+7. **🎨 Advanced Theming Engine**: Allow users to create, import, and share custom editor themes.
+8. **📂 Cloud Storage Sync**: Save workspaces to the cloud and access them from any device.
+9. **🖥️ Desktop App**: Electron or Tauri-based standalone application (.exe, .dmg, .AppImage).
+
+---
+
+## 🤝 Why Contribute to rose.dev?
+
+We believe the future of coding is collaborative and AI-driven. While rose.dev is built as a premium product, we are opening the doors to the community to make it the **absolute best open-source AI editor in the world**.
+
+By contributing, you get to:
+1. **Shape the Future**: Influence how developers write code in the browser.
+2. **Work with Cutting-Edge Tech**: Gain hands-on experience with Next.js 16, Monaco Editor, Hugging Face Inference, and complex state management.
+3. **Build Your Portfolio**: Be recognized as a core contributor to a premium open-source project.
+
+Whether you're fixing a bug, adding a new feature, or improving documentation, **your code matters!**
+
+👉 Please see our [CONTRIBUTING.md](./CONTRIBUTING.md) to get started!
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18.x or later
+- npm or yarn or pnpm
+- Hugging Face API Token (for AI features)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/alornishan014/KoraGPT_IDE.git
+   cd KoraGPT_IDE
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 🔑 API Settings Setup
+To use the AI features, you need to configure your API token in the settings.
+
+**Quick Setup:**
+1. Click on "API Settings" in the sidebar
+2. Choose your provider (Hugging Face, OpenAI, Ollama, etc.)
+3. Enter your API token
+4. Enter model ID
+5. Click "Save"
+
+**For detailed setup instructions in Bengali, see [SETUP_BANGLA.md](./SETUP_BANGLA.md)**
+
+<div align="center">
+  <img src="public/Instraction.jpg" width="600" alt="API Settings Instruction" />
+</div>
+
+### 📚 Documentation
+
+- **[FEATURES.md](./FEATURES.md)** - Complete feature documentation
+- **[SETUP_BANGLA.md](./SETUP_BANGLA.md)** - Setup guide in Bengali (বাংলা সেটআপ গাইড)
+- **[DEEPSEEK_SETUP.md](./DEEPSEEK_SETUP.md)** - DeepSeek API setup guide
+- **[BUILD_DESKTOP.md](./BUILD_DESKTOP.md)** - Desktop app build guide
+- **[COMPLETE_GUIDE.md](./COMPLETE_GUIDE.md)** - Comprehensive guide
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Contribution guidelines
+
+---
+
+## 🖼️ Adding Images to README (Example)
+*Want to make your project's README visually appealing? You can easily add images!*
+
+**Markdown Syntax:**
+```markdown
+![Alt text describing the image](https://link-to-your-image.com/image.png)
+```
+**HTML Syntax (For better control over size/alignment):**
+```html
+<div align="center">
+  <img src="https://link-to-your-image.com/image.png" width="600" alt="App Screenshot" />
+</div>
+```
+*(Tip: You can drag and drop images directly into the GitHub editor, or host them in your repository's `public/` folder and link to them like `![logo](./public/logo.png)`.)*
+
+---
+
+## 🛡️ License & Copyright
+
+**Copyright © 2026 EliussRose. All rights reserved.**
+
+This project is open-source under the AGPL-3.0 License.
+- ✅ **You CAN** use, modify, and distribute this software for personal or commercial purposes.
+- ❌ **You CANNOT** use the "rose.dev" name, branding, or logo for any derivative works without explicit written permission.
+- ❌ **You CANNOT** remove the copyright headers from the source files. The branding and identity of "rose.dev" must be respected.
+- 🔄 **You MUST** open-source any modifications or derivative works under the same AGPL-3.0 License.
+
+---
+
+<div align="center">
+  <b>Built with ❤️ by EliussRose</b><br>
+  <i>Developer: EliussRose | Email: eliussksa@gmail.com</i>
+</div>

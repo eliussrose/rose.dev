@@ -1,0 +1,58 @@
+{
+  "appId": "com.rosedev.ide",
+  "productName": "rosedev-AI-IDE",
+  "copyright": "Copyright © 2026 rose.dev",
+  "directories": {
+    "output": "dist-electron",
+    "buildResources": "public"
+  },
+  "files": [
+    "electron.js",
+    "preload.js",
+    ".next/standalone/**/*",
+    ".next/static/**/*",
+    "public/**/*",
+    "package.json"
+  ],
+  "asarUnpack": [
+    ".next/standalone/**/*",
+    ".next/static/**/*",
+    "public/**/*"
+  ],
+  "extraResources": [
+    {
+      "from": "node_modules/.bin/pyright",
+      "to": "pyright"
+    }
+  ],
+  "win": {
+    "target": [
+      { "target": "nsis", "arch": ["x64"] },
+      { "target": "portable", "arch": ["x64"] }
+    ],
+    "icon": "public/icon.png",
+    "artifactName": "rose.dev-AI-IDE-Setup-${version}.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "rose.dev AI IDE"
+  },
+  "mac": {
+    "target": ["dmg"],
+    "icon": "public/icon.png",
+    "category": "public.app-category.developer-tools",
+    "artifactName": "rose.dev-AI-IDE-${version}.${ext}"
+  },
+  "linux": {
+    "target": ["AppImage", "deb"],
+    "icon": "public/icon.png",
+    "category": "Development",
+    "artifactName": "rose.dev-AI-IDE-${version}.${ext}"
+  },
+  "extraMetadata": {
+    "main": "electron.js"
+  }
+}
