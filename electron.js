@@ -42,7 +42,11 @@ function createSplashWindow() {
     },
   });
 
-  splashWindow.loadFile('splash.html');
+  const splashPath = isDev 
+    ? path.join(__dirname, 'splash.html')
+    : path.join(process.resourcesPath, 'app.asar.unpacked', 'splash.html');
+
+  splashWindow.loadFile(splashPath);
   splashWindow.center();
 
   // Auto-close splash after 3 seconds

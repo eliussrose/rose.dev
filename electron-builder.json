@@ -2,12 +2,6 @@
   "appId": "com.prosinres.rosedev.ide",
   "productName": "rosedev-AI-IDE",
   "copyright": "Copyright © 2026 Prosinres. All rights reserved.",
-  "author": {
-    "name": "EliussRose",
-    "email": "eliussksa@gmail.com",
-    "url": "https://ghury.com"
-  },
-  "company": "Prosinres",
   "directories": {
     "output": "dist-electron",
     "buildResources": "public"
@@ -24,7 +18,8 @@
   "asarUnpack": [
     ".next/standalone/**/*",
     ".next/static/**/*",
-    "public/**/*"
+    "public/**/*",
+    "splash.html"
   ],
   "extraResources": [
     {
