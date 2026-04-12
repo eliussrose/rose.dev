@@ -157,7 +157,12 @@ To use the AI features, you need to configure your API token in the settings.
 
 ## 🛡️ License & Copyright
 
-**Copyright © 2026 EliussRose. All rights reserved.**
+**Copyright © 2026 Prosinres. All rights reserved.**
+
+**Developer:** EliussRose  
+**Email:** eliussksa@gmail.com  
+**Website:** https://ghury.com  
+**Company:** Prosinres
 
 This project is open-source under the AGPL-3.0 License.
 - ✅ **You CAN** use, modify, and distribute this software for personal or commercial purposes.
@@ -168,6 +173,14 @@ This project is open-source under the AGPL-3.0 License.
 ---
 
 <div align="center">
-  <b>Built with ❤️ by EliussRose</b><br>
-  <i>Developer: EliussRose | Email: eliussksa@gmail.com</i>
+  <b>Built with ❤️ by EliussRose @ Prosinres</b><br>
+  <p>
+    <b>Developer:</b> EliussRose<br>
+    <b>Email:</b> eliussksa@gmail.com<br>
+    <b>Website:</b> <a href="https://ghury.com">ghury.com</a><br>
+    <b>Company:</b> Prosinres
+  </p>
+  <p>
+    <i>© 2026 Prosinres. All rights reserved.</i>
+  </p>
 </div>

@@ -150,11 +150,25 @@ Desktop app চালু হলে:
 
 MIT License - See [LICENSE](LICENSE) file
 
-## 👨‍💻 Author
+## 👨‍💻 Developer
 
 **EliussRose**
 - Email: eliussksa@gmail.com
+- Website: [ghury.com](https://ghury.com)
 - GitHub: [@eliussrose](https://github.com/eliussrose)
+- Company: Prosinres
+
+## 🏢 Company
+
+**Prosinres**
+- Website: [ghury.com](https://ghury.com)
+
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE) file
+
+© 2026 Prosinres. All rights reserved.
+
 
 ## 🙏 Acknowledgments
 
@@ -168,5 +182,9 @@ MIT License - See [LICENSE](LICENSE) file
 **Version**: 2.0.0  
 **Status**: ✅ Production Ready  
 **Last Updated**: 2026-04-12
+
+**Developer:** EliussRose (eliussksa@gmail.com)  
+**Company:** Prosinres  
+**Website:** [ghury.com](https://ghury.com)
 
 🎉 Enjoy coding with rose.dev AI IDE!

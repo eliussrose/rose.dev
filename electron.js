@@ -5,6 +5,7 @@ const fs = require('fs').promises;
 const http = require('http');
 
 let mainWindow;
+let splashWindow;
 let nextProcess;
 const NEXT_PORT = 3000;
 const isDev = process.env.NODE_ENV === 'development';
@@ -26,6 +27,32 @@ app.on('second-instance', () => {
     mainWindow.focus();
   }
 });
+
+function createSplashWindow() {
+  splashWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
+    transparent: true,
+    frame: false,
+    alwaysOnTop: true,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
+  });
+
+  splashWindow.loadFile('splash.html');
+  splashWindow.center();
+
+  // Auto-close splash after 3 seconds
+  setTimeout(() => {
+    if (splashWindow && !splashWindow.isDestroyed()) {
+      splashWindow.close();
+      splashWindow = null;
+    }
+  }, 3000);
+}
 
 function waitForServer(port, timeout = 60000) {
   return new Promise((resolve) => {
@@ -182,8 +209,16 @@ app.on('ready', async () => {
   console.log('[rose.dev] __dirname:', __dirname);
   console.log('[rose.dev] resourcesPath:', process.resourcesPath);
   
+  // Show splash screen
+  createSplashWindow();
+  
+  // Start server in background
   await startNextServer();
-  createWindow();
+  
+  // Wait a bit for splash animation
+  setTimeout(() => {
+    createWindow();
+  }, 3000);
 });
 
 app.on('window-all-closed', () => {

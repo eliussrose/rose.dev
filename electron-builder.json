@@ -1,7 +1,13 @@
 {
-  "appId": "com.rosedev.ide",
+  "appId": "com.prosinres.rosedev.ide",
   "productName": "rosedev-AI-IDE",
-  "copyright": "Copyright © 2026 rose.dev",
+  "copyright": "Copyright © 2026 Prosinres. All rights reserved.",
+  "author": {
+    "name": "EliussRose",
+    "email": "eliussksa@gmail.com",
+    "url": "https://ghury.com"
+  },
+  "company": "Prosinres",
   "directories": {
     "output": "dist-electron",
     "buildResources": "public"
@@ -9,6 +15,7 @@
   "files": [
     "electron.js",
     "preload.js",
+    "splash.html",
     ".next/standalone/**/*",
     ".next/static/**/*",
     "public/**/*",

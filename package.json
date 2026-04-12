@@ -2,8 +2,21 @@
   "name": "rose-dev-ide",
   "version": "2.0.0",
   "description": "rose.dev AI IDE - Premium Code Editor with AI Integration",
-  "author": "EliussRose <eliussksa@gmail.com>",
+  "author": {
+    "name": "EliussRose",
+    "email": "eliussksa@gmail.com",
+    "url": "https://ghury.com"
+  },
+  "company": "Prosinres",
   "homepage": "https://github.com/eliussrose/rose-dev-ide",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eliussrose/rose.dev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eliussrose/rose.dev/issues",
+    "email": "eliussksa@gmail.com"
+  },
   "main": "electron.js",
   "private": true,
   "scripts": {

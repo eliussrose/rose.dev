@@ -437,3 +437,26 @@ rose.dev/
 **Author**: EliussRose
 
 **Built with ❤️ for rose.dev**
+
+
+---
+
+## 👨‍💻 Developer Information
+
+**Developer:** EliussRose  
+**Email:** eliussksa@gmail.com  
+**Website:** https://ghury.com  
+**Company:** Prosinres  
+**GitHub:** https://github.com/eliussrose
+
+## 📞 Contact
+
+প্রশ্ন বা সাহায্যের জন্য:
+- **Email:** eliussksa@gmail.com
+- **Website:** https://ghury.com
+- **GitHub Issues:** https://github.com/eliussrose/rose.dev/issues
+
+---
+
+**© 2026 Prosinres. All rights reserved.**  
+**Built with ❤️ by EliussRose @ Prosinres**

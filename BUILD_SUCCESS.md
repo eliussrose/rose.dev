@@ -143,3 +143,18 @@ app.asar.unpacked/
 **Version**: 2.0.0
 
 🎉 Desktop app সফলভাবে build এবং test করা হয়েছে!
+
+
+---
+
+## 👨‍💻 Developer Information
+
+**Developer:** EliussRose  
+**Email:** eliussksa@gmail.com  
+**Website:** https://ghury.com  
+**Company:** Prosinres  
+**GitHub:** https://github.com/eliussrose
+
+---
+
+**© 2026 Prosinres. All rights reserved.**
