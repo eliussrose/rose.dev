@@ -39,3 +39,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# electron build output
+/dist-electron/
+/build-output/
+*.exe
+*.blockmap
+
+# resources
+/resources/
+
+# logs
+*.log
+error.log
+output.log
+
+# tauri build
+/src-tauri/target/
