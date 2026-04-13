@@ -118,88 +118,158 @@ function checkServer(port, maxAttempts = 60) {
 
 async function startServer() {
   if (isDev) {
+    console.log('[Dev Mode] Checking if dev server is running on port', PORT);
     return checkServer(PORT);
   }
 
-  const serverScript = path.join(
-    process.resourcesPath,
-    'app.asar.unpacked',
-    '.next',
-    'standalone',
-    'server.js'
-  );
+  console.log('[Production Mode] Starting standalone server...');
+  
+  // Try multiple possible paths for the standalone server
+  const possiblePaths = [
+    // Path 1: ASAR unpacked
+    path.join(process.resourcesPath, 'app.asar.unpacked', '.next', 'standalone', 'server.js'),
+    // Path 2: Direct in resources
+    path.join(process.resourcesPath, '.next', 'standalone', 'server.js'),
+    // Path 3: Relative to app
+    path.join(__dirname, '.next', 'standalone', 'server.js'),
+  ];
 
-  if (!fsSync.existsSync(serverScript)) {
+  let serverScript = null;
+  for (const p of possiblePaths) {
+    console.log('[Server] Checking path:', p);
+    if (fsSync.existsSync(p)) {
+      serverScript = p;
+      console.log('[Server] Found server at:', p);
+      break;
+    }
+  }
+
+  if (!serverScript) {
+    console.error('[Server] server.js not found in any expected location');
+    console.error('[Server] Checked paths:', possiblePaths);
     return false;
+  }
+
+  // Find Node.js executable
+  let nodePath = process.execPath; // Use Electron's Node.js by default
+  
+  // Try to find bundled node.exe
+  const bundledNode = path.join(process.resourcesPath, 'node.exe');
+  if (fsSync.existsSync(bundledNode)) {
+    nodePath = bundledNode;
+    console.log('[Server] Using bundled Node.js:', nodePath);
+  } else {
+    console.log('[Server] Using Electron Node.js:', nodePath);
   }
 
   return new Promise((resolve) => {
     try {
-      // Find node.exe - it should be in PATH
-      const nodePath = process.platform === 'win32' ? 'node.exe' : 'node';
+      const serverDir = path.dirname(serverScript);
+      console.log('[Server] Server directory:', serverDir);
+      console.log('[Server] Node path:', nodePath);
       
       serverProcess = spawn(nodePath, [serverScript], {
-        cwd: path.dirname(serverScript),
+        cwd: serverDir,
         env: { 
           ...process.env, 
           NODE_ENV: 'production', 
           PORT: String(PORT),
-          HOSTNAME: '0.0.0.0'
+          HOSTNAME: '127.0.0.1'
         },
         stdio: ['ignore', 'pipe', 'pipe'],
         windowsHide: true,
       });
 
-      // Log server output for debugging
+      // Log server output
       if (serverProcess.stdout) {
         serverProcess.stdout.on('data', (data) => {
-          console.log('[Server]', data.toString());
+          console.log('[Server Output]', data.toString());
         });
       }
       
       if (serverProcess.stderr) {
         serverProcess.stderr.on('data', (data) => {
-          console.log('[Server Error]', data.toString());
+          console.error('[Server Error]', data.toString());
         });
       }
 
       serverProcess.on('error', (err) => {
-        console.log('Server spawn error:', err);
+        console.error('[Server] Spawn error:', err);
         resolve(false);
       });
       
-      serverProcess.on('exit', (code) => {
-        console.log('Server exited with code:', code);
+      serverProcess.on('exit', (code, signal) => {
+        console.log('[Server] Process exited with code:', code, 'signal:', signal);
         serverProcess = null;
       });
 
-      // Wait longer for server to start
+      // Give server time to start, then check
+      console.log('[Server] Waiting for server to start...');
       setTimeout(() => {
-        checkServer(PORT, 50).then(resolve);
-      }, 5000);
+        checkServer(PORT, 30).then((ready) => {
+          if (ready) {
+            console.log('[Server] Server is ready!');
+          } else {
+            console.error('[Server] Server failed to start within timeout');
+          }
+          resolve(ready);
+        });
+      }, 3000);
     } catch (err) {
-      console.log('Server start exception:', err);
+      console.error('[Server] Start exception:', err);
       resolve(false);
     }
   });
 }
 
 function createWindow() {
+  console.log('[Window] Creating main window...');
+  
   mainWindow = new BrowserWindow({
     width: 1400,
     height: 900,
     backgroundColor: '#0d1117',
+    show: false, // Don't show until ready
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js'),
+      devTools: true, // Enable DevTools in production for debugging
     },
   });
 
   mainWindow.setMenuBarVisibility(false);
-  mainWindow.loadURL(`http://127.0.0.1:${PORT}`);
+  
+  // Show window when ready to prevent white flash
+  mainWindow.once('ready-to-show', () => {
+    console.log('[Window] Window ready to show');
+    mainWindow.show();
+  });
+  
+  // Log navigation events
+  mainWindow.webContents.on('did-start-loading', () => {
+    console.log('[Window] Started loading');
+  });
+  
+  mainWindow.webContents.on('did-finish-load', () => {
+    console.log('[Window] Finished loading');
+  });
+  
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
+    console.error('[Window] Failed to load:', errorCode, errorDescription);
+  });
+
+  const url = `http://127.0.0.1:${PORT}`;
+  console.log('[Window] Loading URL:', url);
+  mainWindow.loadURL(url);
+  
+  // Open DevTools in production for debugging
+  if (!isDev) {
+    mainWindow.webContents.openDevTools();
+  }
   
   mainWindow.on('closed', () => {
+    console.log('[Window] Window closed');
     mainWindow = null;
   });
 }

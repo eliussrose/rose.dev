@@ -1,40 +1,39 @@
 {
   "appId": "com.prosinres.rosedev.ide",
-  "productName": "rosedev-AI-IDE",
+  "productName": "rose.dev-AI-IDE",
   "copyright": "Copyright © 2026 Prosinres. All rights reserved.",
   "directories": {
-    "output": "build-output",
+    "output": "build",
     "buildResources": "public"
   },
   "files": [
     "electron.js",
     "preload.js",
-    ".next/**/*",
+    ".next/standalone/**/*",
+    ".next/static/**/*",
     "public/**/*",
     "package.json",
-    "LICENSE.txt",
-    "!.next/cache/**/*",
-    "!.next/server/**/*"
+    "node_modules/.pnpm/**/*",
+    "!node_modules/.pnpm/**/node_modules",
+    "!**/*.map",
+    "!.next/cache/**/*"
+  ],
+  "extraResources": [
+    {
+      "from": "resources/node.exe",
+      "to": "node.exe",
+      "filter": ["**/*"]
+    }
   ],
   "asarUnpack": [
     ".next/**/*",
-    "public/**/*"
+    "node_modules/**/*"
   ],
   "win": {
     "target": [
-      { "target": "nsis", "arch": ["x64"] },
-      { "target": "portable", "arch": ["x64"] }
+      { "target": "dir", "arch": ["x64"] }
     ],
-    "icon": "public/icon.png",
     "artifactName": "rose.dev-AI-IDE-Setup-${version}.${ext}"
-  },
-  "nsis": {
-    "oneClick": false,
-    "allowToChangeInstallationDirectory": true,
-    "createDesktopShortcut": true,
-    "createStartMenuShortcut": true,
-    "shortcutName": "rose.dev AI IDE",
-    "license": "LICENSE.txt"
   },
   "mac": {
     "target": ["dmg"],

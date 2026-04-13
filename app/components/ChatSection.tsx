@@ -314,7 +314,7 @@ export const ChatSection = ({
             }}
             rows={1}
             className="w-full py-3 pl-2 pr-10 text-xs text-gray-200 bg-transparent focus:outline-none resize-none overflow-y-auto max-h-36 leading-relaxed scrollbar-hide"
-            placeholder={chatMode === "chat" ? "Ask Kora AI..." : "Describe the image..."}
+            placeholder={chatMode === "chat" ? "Ask Rose AI..." : "Describe the image..."}
           />
           <button type="submit" disabled={isLoading || !input.trim()} className="absolute right-2 p-1.5 bg-yellow-400 text-[#0a233b] rounded-lg hover:bg-yellow-500 transition-all disabled:opacity-30">
             <Send className="w-3.5 h-3.5" />
