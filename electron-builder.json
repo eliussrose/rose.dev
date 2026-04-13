@@ -3,29 +3,22 @@
   "productName": "rosedev-AI-IDE",
   "copyright": "Copyright © 2026 Prosinres. All rights reserved.",
   "directories": {
-    "output": "dist-electron",
+    "output": "build-output",
     "buildResources": "public"
   },
   "files": [
     "electron.js",
     "preload.js",
-    "splash.html",
-    ".next/standalone/**/*",
-    ".next/static/**/*",
+    ".next/**/*",
     "public/**/*",
-    "package.json"
+    "package.json",
+    "LICENSE.txt",
+    "!.next/cache/**/*",
+    "!.next/server/**/*"
   ],
   "asarUnpack": [
-    ".next/standalone/**/*",
-    ".next/static/**/*",
-    "public/**/*",
-    "splash.html"
-  ],
-  "extraResources": [
-    {
-      "from": "node_modules/.bin/pyright",
-      "to": "pyright"
-    }
+    ".next/**/*",
+    "public/**/*"
   ],
   "win": {
     "target": [
@@ -40,7 +33,8 @@
     "allowToChangeInstallationDirectory": true,
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "shortcutName": "rose.dev AI IDE"
+    "shortcutName": "rose.dev AI IDE",
+    "license": "LICENSE.txt"
   },
   "mac": {
     "target": ["dmg"],

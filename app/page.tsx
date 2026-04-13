@@ -8,6 +8,7 @@
 import { useState, useEffect, useRef } from "react";
 import { HfInference } from "@huggingface/inference";
 import { Sidebar } from "./components/Sidebar";
+import { VerticalToolbar, ToolbarView } from "./components/VerticalToolbar";
 import { EditorSection } from "./components/EditorSection";
 import { ChatSection } from "./components/ChatSection";
 import { Terminal } from "./components/Terminal";
@@ -47,6 +48,7 @@ export default function ChatApp() {
   const [showGitHub, setShowGitHub] = useState<boolean>(false);
   const [showAdvancedFeatures, setShowAdvancedFeatures] = useState<boolean>(false);
   const [workspaceRoot, setWorkspaceRoot] = useState<string | undefined>(undefined);
+  const [activeToolbarView, setActiveToolbarView] = useState<ToolbarView>("files");
   const terminalFixAppliedRef = useRef<(() => void) | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -609,51 +611,72 @@ export default function ChatApp() {
     }
   };
 
+  const handleToolbarViewChange = (view: ToolbarView) => {
+    setActiveToolbarView(view);
+    if (view === "terminal") {
+      setIsTerminalOpen(true);
+    } else if (view === "advanced") {
+      setShowAdvancedFeatures(true);
+      setActiveToolbarView(null);
+    }
+  };
+
   return (
-    <div className="flex flex-col md:flex-row h-screen font-sans overflow-hidden bg-[#0d1117] text-white transition-colors duration-300 dark">
-      <Sidebar
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
-        createNewChat={createNewChat}
-        projectItems={projectItems}
-        toggleFolder={toggleFolder}
-        removeItem={removeItem}
-        createNewItem={createNewItem}
-        setActiveFileId={setActiveFileHandler}
-        setReferencedFileIds={setReferencedFileIds}
-        referencedFileIds={referencedFileIds}
-        activeFileId={activeFileId}
-        sessions={sessions}
-        setCurrentSessionId={setCurrentSessionId}
-        currentSessionId={currentSessionId}
-        deleteSession={deleteSession}
-        showApiSettings={showApiSettings}
-        setShowApiSettings={setShowApiSettings}
-        token={token}
-        setToken={setToken}
-        modelId={modelId}
-        setModelId={setModelId}
-        provider={provider}
-        setProvider={setProvider}
-        baseUrl={baseUrl}
-        setBaseUrl={setBaseUrl}
-        saveSettings={saveSettings}
-        fileInputRef={fileInputRef}
-        folderInputRef={folderInputRef}
-        handleFileUpload={handleFileUpload}
-        setProjectItems={setProjectItems}
-        isElectron={isElectron}
-        openFolderFromDisk={openFolderFromDisk}
+    <div className="flex h-screen font-sans overflow-hidden bg-[#0d1117] text-white transition-colors duration-300 dark">
+      {/* Vertical Toolbar */}
+      <VerticalToolbar
+        activeView={activeToolbarView}
+        onViewChange={handleToolbarViewChange}
         agentMode={agentMode}
-        toggleAgentMode={toggleAgentMode}
-        onCreateFile={handleCreateFile}
-        onCreateFolder={handleCreateFolder}
-        onRename={handleRenameItem}
-        onDelete={handleDeleteItem}
-        workspaceRoot={workspaceRoot}
       />
 
-      <div className={`flex-1 overflow-hidden relative ${mobileView === "editor" ? "flex" : "hidden"} md:flex`}>
+      {/* Sidebar Panel */}
+      {activeToolbarView && activeToolbarView !== "terminal" && activeToolbarView !== "advanced" && (
+        <Sidebar
+          isSidebarOpen={true}
+          setIsSidebarOpen={(open) => !open && setActiveToolbarView(null)}
+          createNewChat={createNewChat}
+          projectItems={projectItems}
+          toggleFolder={toggleFolder}
+          removeItem={removeItem}
+          createNewItem={createNewItem}
+          setActiveFileId={setActiveFileHandler}
+          setReferencedFileIds={setReferencedFileIds}
+          referencedFileIds={referencedFileIds}
+          activeFileId={activeFileId}
+          sessions={sessions}
+          setCurrentSessionId={setCurrentSessionId}
+          currentSessionId={currentSessionId}
+          deleteSession={deleteSession}
+          showApiSettings={showApiSettings}
+          setShowApiSettings={setShowApiSettings}
+          token={token}
+          setToken={setToken}
+          modelId={modelId}
+          setModelId={setModelId}
+          provider={provider}
+          setProvider={setProvider}
+          baseUrl={baseUrl}
+          setBaseUrl={setBaseUrl}
+          saveSettings={saveSettings}
+          fileInputRef={fileInputRef}
+          folderInputRef={folderInputRef}
+          handleFileUpload={handleFileUpload}
+          setProjectItems={setProjectItems}
+          isElectron={isElectron}
+          openFolderFromDisk={openFolderFromDisk}
+          agentMode={agentMode}
+          toggleAgentMode={toggleAgentMode}
+          onCreateFile={handleCreateFile}
+          onCreateFolder={handleCreateFolder}
+          onRename={handleRenameItem}
+          onDelete={handleDeleteItem}
+          workspaceRoot={workspaceRoot}
+          activeTab={activeToolbarView === "files" ? "explorer" : activeToolbarView === "analyzer" ? "analyzer" : "github"}
+        />
+      )}
+
+      <div className="flex-1 overflow-hidden relative flex">
         <EditorSection
           activeFile={activeFile}
           openFiles={projectItems.filter(f => openFileIds.includes(f.id))}
@@ -669,24 +692,9 @@ export default function ChatApp() {
           savedContents={savedContents}
           setSavedContents={setSavedContents}
         />
-
-        <div className="absolute bottom-6 right-6 flex flex-col gap-3 z-20">
-          <button onClick={() => setShowAdvancedFeatures(true)}
-            className="bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition-colors" title="Advanced Features">
-            <span className="text-xl">🚀</span>
-          </button>
-          <button onClick={() => setIsTerminalOpen(!isTerminalOpen)}
-            className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors" title="Toggle Terminal">
-            <span className="text-xl">⌨️</span>
-          </button>
-          <button onClick={() => setMobileView("chat")}
-            className="md:hidden bg-yellow-500 text-[#0a233b] p-3 rounded-full shadow-lg">
-            <span className="text-xl">💬</span>
-          </button>
-        </div>
       </div>
 
-      <div className={`${mobileView === "chat" ? "flex" : "hidden"} md:flex w-full md:w-80 lg:w-96 flex-shrink-0 h-full`}>
+      <div className="w-full md:w-80 lg:w-96 flex-shrink-0 h-full">
         <ChatSection
           messages={messages}
           currentSession={currentSession}

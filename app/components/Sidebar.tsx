@@ -58,6 +58,7 @@ interface SidebarProps {
   onRename?: (item: ProjectItem) => void;
   onDelete?: (path: string) => void;
   workspaceRoot?: string;
+  activeTab?: "explorer" | "analyzer" | "github";
 }
 
 export const Sidebar = ({
@@ -100,9 +101,15 @@ export const Sidebar = ({
   onRename,
   onDelete,
   workspaceRoot,
+  activeTab: initialActiveTab = "explorer",
 }: SidebarProps) => {
-  const [activeTab, setActiveTab] = useState<"explorer" | "analyzer" | "github">("explorer");
+  const [activeTab, setActiveTab] = useState<"explorer" | "analyzer" | "github">(initialActiveTab);
   const [showSettingsPanel, setShowSettingsPanel] = useState(false);
+
+  // Update activeTab when prop changes
+  React.useEffect(() => {
+    setActiveTab(initialActiveTab);
+  }, [initialActiveTab]);
 
   return (
     <>
@@ -114,8 +121,8 @@ export const Sidebar = ({
       )}
 
       <div className={cn(
-        "fixed md:relative inset-y-0 left-0 w-64 bg-[#0a233b] text-white flex flex-col h-full border-r border-gray-800 shadow-2xl z-30 transition-transform duration-300 ease-in-out flex-shrink-0",
-        isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        "w-64 bg-[#0a233b] text-white flex flex-col h-full border-r border-gray-800 shadow-2xl transition-all duration-300 ease-in-out flex-shrink-0",
+        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         {/* Header */}
         <div className="p-4 border-b border-gray-700 flex flex-col gap-4">

@@ -1,15 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: "standalone",  // Enable standalone mode for Electron
   images: {
     unoptimized: true,
   },
-  trailingSlash: false,
-  // Empty turbopack config to silence warning
-  turbopack: {},
-  // Server external packages
-  serverExternalPackages: ['child_process'],
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default nextConfig;

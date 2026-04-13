@@ -1,6 +1,6 @@
 {
   "name": "rose-dev-ide",
-  "version": "2.0.0",
+  "version": "2.0.41",
   "description": "rose.dev AI IDE - Premium Code Editor with AI Integration",
   "author": {
     "name": "EliussRose",
@@ -21,22 +21,27 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:static": "next build && next export",
+    "build": "node scripts/version-bump.js && next build",
     "start": "next start",
     "lint": "eslint",
     "electron": "electron .",
     "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron:build": "next build && node scripts/copy-standalone-deps.js && electron-builder",
-    "electron:build:win": "next build && node scripts/copy-standalone-deps.js && electron-builder --win",
-    "electron:build:mac": "next build && node scripts/copy-standalone-deps.js && electron-builder --mac",
-    "electron:build:linux": "next build && node scripts/copy-standalone-deps.js && electron-builder --linux",
+    "electron:build": "node scripts/version-bump.js && next build && electron-builder",
+    "electron:build:win": "node scripts/version-bump.js && next build && node scripts/copy-standalone-deps.js && electron-builder --win",
+    "electron:build:mac": "node scripts/version-bump.js && next build && node scripts/copy-standalone-deps.js && electron-builder --mac",
+    "electron:build:linux": "node scripts/version-bump.js && next build && node scripts/copy-standalone-deps.js && electron-builder --linux",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "version:bump": "node scripts/version-bump.js",
+    "version:reset": "node scripts/version-reset.js",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "tauri:build:win": "tauri build --target x86_64-pc-windows-msvc"
   },
   "dependencies": {
     "@huggingface/inference": "^4.13.15",
     "@monaco-editor/react": "^4.7.0",
+    "@tauri-apps/api": "^2.10.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.7.0",
     "monaco-languageclient": "^8.1.1",
@@ -53,6 +58,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@tauri-apps/cli": "^2.10.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
